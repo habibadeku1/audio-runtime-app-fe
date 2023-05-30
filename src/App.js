@@ -13,7 +13,7 @@ function App() {
     formData.append('audio', selectedFile);
 
     axios
-      .post('http://localhost:3001/upload', formData)
+      .post('http://ec2-54-73-232-147.eu-west-1.compute.amazonaws.com:3001/upload', formData)
       .then((response) => {
         console.log(response.data);
       })
