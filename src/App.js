@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [trackDuration, setTrackDuration] = useState(null);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -14,8 +15,10 @@ function App() {
 
     axios
       .post('http://ec2-54-73-232-147.eu-west-1.compute.amazonaws.com:3001/upload', formData)
+      // .post('http://localhost:3001/upload', formData)
       .then((response) => {
         console.log(response.data);
+        setTrackDuration(response.data)
       })
       .catch((error) => {
         console.error(error);
@@ -27,6 +30,7 @@ function App() {
       <h1>Audio Uploader</h1>
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleFileUpload}>Upload</button>
+      <p>Audio length in seconds: {trackDuration?.format?.duration}</p>
     </div>
   );
 }
